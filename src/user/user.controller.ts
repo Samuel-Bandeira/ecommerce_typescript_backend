@@ -8,14 +8,14 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
   createUser(@Body() payload: CreateUserDto) {
     console.log(payload);
     return this.userService.createUser(payload);
   }
 
   @Get()
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
   getUsers() {
     return this.userService.getUsers();
   }

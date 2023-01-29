@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
+import { Response } from 'express';
 interface PayloadI {
   email: string;
   password: string;
@@ -22,17 +23,19 @@ export class AuthService {
     return null;
   }
 
-  async login(@Body() payload: any) {
-    console.log(payload);
+  async login(payload: any, response: Response) {
     const user = await this.validateUser(payload);
-    console.log(user);
+    const jwt = this.jwtService.sign({
+      email: user.email,
+      sub: user.id,
+    });
+
+    response.cookie('jwt', jwt, {
+      httpOnly: true,
+    });
+
     if (user) {
-      return {
-        access_token: this.jwtService.sign({
-          email: user.email,
-          sub: user.id,
-        }),
-      };
+      return 'success';
     }
 
     return 'error';
