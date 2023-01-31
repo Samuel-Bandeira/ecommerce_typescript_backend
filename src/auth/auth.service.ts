@@ -4,10 +4,6 @@ import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { Response } from 'express';
-interface PayloadI {
-  email: string;
-  password: string;
-}
 
 @Injectable()
 export class AuthService {
@@ -35,7 +31,11 @@ export class AuthService {
     });
 
     if (user) {
-      return 'success';
+      return {
+        access_token: jwt,
+        email: user.email,
+        name: user.name,
+      };
     }
 
     return 'error';
