@@ -8,6 +8,6 @@ export class CreditCardController {
 
   @Post()
   addCard(@Body() payload: AddCardDto) {
-    this.creditCardService.addCard(payload);
+    return this.creditCardService.addCard(payload);
   }
 }

@@ -19,13 +19,12 @@ export class CreditCardService {
   }
 
   async addCard(payload: AddCardDto): Promise<CreditCard> {
-    console.log(payload);
     const user: User = await this.userService.getUserById(payload.userId);
-    const brand: string = this.getCardBrand(payload.cc_number);
-
-    const creditCard = this.creditCardRepository.create({
-      cc_num: payload.cc_number,
-      expires_at: payload.expires_at,
+    const brand: string = this.getCardBrand(payload.cardNumber);
+    const creditCard: CreditCard = this.creditCardRepository.create({
+      cc_num: payload.cardNumber,
+      holder_name: payload.cardName,
+      expires_at: payload.expiresAt,
       brand: brand,
       user: user,
     });

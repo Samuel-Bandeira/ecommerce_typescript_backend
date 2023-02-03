@@ -16,7 +16,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @UseGuards(JwtGuard)
   createUser(@Body() payload: CreateUserDto) {
     console.log(payload);
     return this.userService.createUser(payload);

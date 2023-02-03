@@ -7,7 +7,9 @@ export class CreditCard {
   @Column()
   cc_num: number;
   @Column()
-  expires_at: Date;
+  expires_at: string;
+  @Column()
+  holder_name: string;
   @Column()
   brand: string;
   @ManyToOne((type) => User, (user) => user.creditCards)

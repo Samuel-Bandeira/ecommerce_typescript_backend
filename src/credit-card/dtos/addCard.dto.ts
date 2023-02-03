@@ -1,5 +1,6 @@
 export class AddCardDto {
   userId: number;
-  cc_number: number;
-  expires_at: Date;
+  cardNumber: number;
+  cardName: string;
+  expiresAt: string;
 }
